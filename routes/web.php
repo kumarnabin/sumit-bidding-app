@@ -14,7 +14,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(["middleware" => "auth"], function () {
     Route::resources([
-        "role" => \App\Http\Controllers\RoleController::class,
+        "users" => \App\Http\Controllers\UserController::class,
+        "roles" => \App\Http\Controllers\RoleController::class,
         "items" => \App\Http\Controllers\ItemController::class,
         "categories" => \App\Http\Controllers\CategoryController::class,
         "auctions" => \App\Http\Controllers\AuctionController::class,

@@ -54,6 +54,10 @@
                         <li class="nav-item"><a class="nav-link" href="{{route('categories.index')}}"> Categories</a>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="{{route('auctions.index')}}">Auctions</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('feedbacks.index')}}">Feedbacks</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('messages.index')}}">Messages</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('users.index')}}">Users</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('roles.index')}}">Roles</a></li>
 
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"

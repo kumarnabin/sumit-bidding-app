@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Feedback;
+use App\Models\Item;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,7 +16,7 @@ class FeedbackController extends Controller
     public function index()
     {
         return view("feedback.index", [
-            "data" => Feedback::all()
+            "feedbacks" => Feedback::all()
         ]);
     }
 
@@ -23,7 +25,10 @@ class FeedbackController extends Controller
      */
     public function create()
     {
-        return view("feedback.create");
+        return view("feedback.create", [
+            "users" => User::all(),
+            "items" => Item::all(),
+        ]);
     }
 
     /**
@@ -32,13 +37,15 @@ class FeedbackController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
+            'user_id' => ['required', 'exists:users,id'],
             'item_id' => ['required', 'exists:items,id'],
-            'comment' => ['required', 'min:0'],
+            'rating' => ['required', 'min:1'],
+            'comment' => ['nullable', 'min:0'],
         ]);
 
-        $data["user_id"] = Auth::id();
+//        $data["user_id"] = Auth::id();
         Feedback::create($data);
-        return redirect(route("feedback.index"));
+        return redirect(route("feedbacks.index"));
     }
 
     /**
@@ -57,7 +64,9 @@ class FeedbackController extends Controller
     public function edit(Feedback $feedback)
     {
         return view("feedback.edit", [
-            "feedback" => $feedback
+            "feedback" => $feedback,
+            "users" => User::all(),
+            "items" => Item::all(),
         ]);
     }
 
@@ -67,13 +76,15 @@ class FeedbackController extends Controller
     public function update(Request $request, Feedback $feedback)
     {
         $data = $request->validate([
+            'user_id' => ['required', 'exists:users,id'],
             'item_id' => ['required', 'exists:items,id'],
-            'comment' => ['required', 'min:0'],
+            'rating' => ['required', 'min:1'],
+            'comment' => ['nullable', 'min:0'],
         ]);
         $data["user_id"] = Auth::id();
 
         $feedback->update($data);
-        return redirect(route("feedback.index"));
+        return redirect(route("feedbacks.index"));
     }
 
     /**
@@ -82,6 +93,6 @@ class FeedbackController extends Controller
     public function destroy(Feedback $feedback)
     {
         $feedback->delete();
-        return redirect(route("feedback.index"));
+        return redirect(route("feedbacks.index"));
     }
 }

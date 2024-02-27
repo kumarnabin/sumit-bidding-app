@@ -33,7 +33,7 @@
                             <tbody>
                             @foreach($items as $key=>$item)
                                 <tr>
-                                    <th scope="row">{{$key++}}</th>
+                                    <th scope="row">{{++$key}}</th>
                                     <td>{{$item->name}}</td>
                                     <td>{{$item->category?->name}}</td>
                                     <td>{{$item->price}}</td>

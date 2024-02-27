@@ -27,7 +27,7 @@
                             <tbody>
                             @foreach($categories as $key=>$item)
                                 <tr>
-                                    <th scope="row">{{$key++}}</th>
+                                    <th scope="row">{{++$key}}</th>
                                     <td>{{$item->name}}</td>
                                     <td>
                                         <button class="btn btn-sm btn-warning">

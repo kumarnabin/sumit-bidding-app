@@ -14,7 +14,7 @@ class RoleController extends Controller
     public function index()
     {
         return view("role.index", [
-            "data" => Role::all()
+            "roles" => Role::all()
         ]);
     }
 
@@ -37,7 +37,7 @@ class RoleController extends Controller
 
         $data["user_id"] = Auth::id();
         Role::create($data);
-        return redirect(route("role.index"));
+        return redirect(route("roles.index"));
     }
 
     /**
@@ -71,7 +71,7 @@ class RoleController extends Controller
         $data["user_id"] = Auth::id();
 
         $role->update($data);
-        return redirect(route("role.index"));
+        return redirect(route("roles.index"));
     }
 
     /**
@@ -80,6 +80,6 @@ class RoleController extends Controller
     public function destroy(Role $role)
     {
         $role->delete();
-        return redirect(route("role.index"));
+        return redirect(route("roles.index"));
     }
 }

@@ -28,7 +28,7 @@
                             <tbody>
                             @foreach($auctions as $key=>$item)
                                 <tr>
-                                    <th scope="row">{{$key++}}</th>
+                                    <th scope="row">{{++$key}}</th>
                                     <td>{{$item->item?->name}}</td>
                                     <td>{{$item->user?->name}}</td>
                                     <td>{{$item->price}}</td>

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Message;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
@@ -14,7 +14,7 @@ class MessageController extends Controller
     public function index()
     {
         return view("message.index", [
-            "data" => Message::all()
+            "messages" => Message::all()
         ]);
     }
 
@@ -23,7 +23,9 @@ class MessageController extends Controller
      */
     public function create()
     {
-        return view("message.create");
+        return view("message.create", [
+            "users" => User::all()
+        ]);
     }
 
     /**
@@ -34,12 +36,11 @@ class MessageController extends Controller
         $data = $request->validate([
             "message" => ['required', 'min:2'],
             "receiver_id" => ['required', 'exists:users,id'],
+            "sender_id" => ['required', 'exists:users,id'],
 
         ]);
-
-        $data["sender_id"] = Auth::id();
         Message::create($data);
-        return redirect(route("message.index"));
+        return redirect(route("messages.index"));
     }
 
     /**
@@ -58,6 +59,7 @@ class MessageController extends Controller
     public function edit(Message $message)
     {
         return view("message.edit", [
+            "users" => User::all(),
             "message" => $message
         ]);
     }
@@ -69,12 +71,12 @@ class MessageController extends Controller
     {
         $data = $request->validate([
             "message" => ['required', 'min:2'],
+            "sender_id" => ['required', 'exists:users,id'],
             "receiver_id" => ['required', 'exists:users,id'],
         ]);
-        $data["sender_id"] = Auth::id();
 
         $message->update($data);
-        return redirect(route("message.index"));
+        return redirect(route("messages.index"));
     }
 
     /**
@@ -83,6 +85,6 @@ class MessageController extends Controller
     public function destroy(Message $message)
     {
         $message->delete();
-        return redirect(route("message.index"));
+        return redirect(route("messages.index"));
     }
 }

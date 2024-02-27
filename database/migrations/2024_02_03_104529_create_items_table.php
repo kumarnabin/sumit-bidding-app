@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string("description");
             $table->date("bidding_start");
             $table->date("bidding_end");
+            $table->string("image1");
+            $table->string("image2");
+            $table->string("image3");
             $table->foreignId("category_id")->constrained();
             $table->foreignId("user_id")->constrained();
             $table->timestamps();

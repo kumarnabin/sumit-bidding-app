@@ -16,7 +16,10 @@ class Item extends Model
         "price",
         "description",
         "bidding_start",
-        "bidding_end"
+        "bidding_end",
+        "image1",
+        "image2",
+        "image3",
 
     ];
 
@@ -24,6 +27,7 @@ class Item extends Model
     {
         return $this->belongsTo(User::class);
     }
+
     public function category()
     {
         return $this->belongsTo(Category::class);

@@ -8,7 +8,7 @@
                     <div class="card-header">{{ __('Item') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('items.store') }}">
+                        <form method="POST" action="{{ route('items.store') }}" enctype="multipart/form-data">
                             @csrf
 
                             <div class="row mb-3">
@@ -109,6 +109,57 @@
                                            required autocomplete="current-bidding_end">
 
                                     @error('bidding_end')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="image1"
+                                       class="col-md-4 col-form-label text-md-end">{{ __('Image 1') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="image1" type="file"
+                                           class="form-control @error('image1') is-invalid @enderror"
+                                           name="image1"
+                                           autocomplete="current-image1">
+
+                                    @error('image1')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="image2"
+                                       class="col-md-4 col-form-label text-md-end">{{ __('Image 2') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="image2" type="file"
+                                           class="form-control @error('image2') is-invalid @enderror"
+                                           name="image2"
+                                           autocomplete="current-image2">
+
+                                    @error('image2')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="image3"
+                                       class="col-md-4 col-form-label text-md-end">{{ __('Image 3') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="image3" type="file"
+                                           class="form-control @error('image3') is-invalid @enderror"
+                                           name="image3"
+                                           autocomplete="current-image3">
+
+                                    @error('image3')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

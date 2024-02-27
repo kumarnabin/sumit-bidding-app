@@ -27,6 +27,7 @@
                                 <th scope="col">Bidding Start</th>
                                 <th scope="col">Bidding End</th>
                                 <th scope="col">Owner</th>
+                                <th scope="col">Images</th>
                                 <th scope="col">Action</th>
                             </tr>
                             </thead>
@@ -40,6 +41,11 @@
                                     <td>{{$item->bidding_start}}</td>
                                     <td>{{$item->bidding_end}}</td>
                                     <td>{{$item->user?->name}}</td>
+                                    <td>
+                                        <img src="{{asset("storage/".$item->image1)}}" alt="" width="300">
+                                        <img src="{{asset("storage/".$item->image2)}}" alt="" width="300">
+                                        <img src="{{asset("storage/".$item->image3)}}" alt="" width="300">
+                                    </td>
                                     <td>
                                         <button class="btn btn-sm btn-warning">
                                             <a class="nav-link" href="{{route('items.edit',$item)}}">Edit</a>

@@ -43,6 +43,7 @@ class ItemController extends Controller
             "bidding_end" => ['required', 'date']
 
         ]);
+        $data = $this->saveImage($request, $data);
 
         $data["user_id"] = Auth::id();
         Item::create($data);
@@ -84,6 +85,8 @@ class ItemController extends Controller
             "bidding_end" => ['required', 'date']
         ]);
         $data["user_id"] = Auth::id();
+        $data = $this->saveImage($request, $data);
+
 
         $item->update($data);
         return redirect(route("items.index"));
@@ -97,4 +100,28 @@ class ItemController extends Controller
         $item->delete();
         return redirect(route("items.index"));
     }
+
+    /**
+     * @param Request $request
+     * @param array $data
+     * @return array
+     */
+    public function saveImage(Request $request, array $data): array
+    {
+        if ($request->hasFile("image1")) {
+
+            $data["image1"] = $request->file('image1')->store('images', 'public');
+        }
+        if ($request->hasFile("image2")) {
+
+            $data["image2"] = $request->file('image2')->store('images', 'public');
+        }
+        if ($request->hasFile("image3")) {
+
+            $data["image3"] = $request->file('image3')->store('images', 'public');
+        }
+        return $data;
+    }
+
+
 }

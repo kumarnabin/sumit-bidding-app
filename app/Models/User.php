@@ -43,6 +43,11 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function hasAnyRole(...$roles)
+    {
+        return count(array_intersect($this->roles, $roles)) > 0;
+    }
+
     public function roles()
     {
         return $this->belongsToMany(Role::class);
